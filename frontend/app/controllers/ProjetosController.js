@@ -33,7 +33,7 @@ angular.module('meuApp')
 
 
         $scope.listar = function () {
-            $http.get('http://backend:8000/api/projetos/listar', $config).then(function (response) {
+            $http.get('http://localhost:8000/api/projetos/listar', $config).then(function (response) {
                 if (response.status == 200) {
                     $scope.projetos = tratarDados(response.data);
                 }
@@ -64,7 +64,7 @@ angular.module('meuApp')
         }
 
         $scope.consultar = function (id) {
-            url = 'http://backend:8000/api/projetos/consultar/' + id;
+            url = 'http://localhost:8000/api/projetos/consultar/' + id;
             $http.get(url, $config).then(function (response) {
                 if (response.status = 200) {
                     $scope.editarProjeto = tratarDadosConsultar(response.data);
@@ -184,7 +184,7 @@ angular.module('meuApp')
                         post.projeto_id = $scope.editarProjeto.id;
 
 
-                        $http.post('http://backend:8000/api/projetoUsuario/cadastrar', post, $config).then(function (response) {
+                        $http.post('http://localhost:8000/api/projetoUsuario/cadastrar', post, $config).then(function (response) {
                             // $scope.consultar($scope.editarProjeto.id);
                             console.log(response);
                             //fazer depois a atualizçao de informação
@@ -216,7 +216,7 @@ angular.module('meuApp')
                         post.id_projeto = $scope.editarProjeto.id;
 
 
-                        $http.post('http://backend:8000/api/tarefas/cadastrar', post, $config).then(function (response) {
+                        $http.post('http://localhost:8000/api/tarefas/cadastrar', post, $config).then(function (response) {
                             $scope.consultar($scope.editarProjeto.id);
 
                         }, function (error) {
@@ -236,7 +236,7 @@ angular.module('meuApp')
             post = {};
             post.nome = nome;
 
-            url = 'http://backend:8000/api/tarefas/editarParcial/' + id
+            url = 'http://localhost:8000/api/tarefas/editarParcial/' + id
             $http.patch(url, post, $config).then(function (response) {
                 if (response.status == 200) {
                     Swal.fire({
@@ -294,14 +294,14 @@ angular.module('meuApp')
 
         $scope.deletarDeVerdade = function (id, id_arquivo) {
             if(id_arquivo != null) {
-                $http.delete("http://backend:8000/api/arquivos/" + id_arquivo, $config).then(function(response) {
+                $http.delete("http://localhost:8000/api/arquivos/" + id_arquivo, $config).then(function(response) {
                     console.log(response);
                 }, function(error){
                     console.log(error);
                 })
             }
 
-            $http.delete('http://backend:8000/api/projetos/deletar/' + id, $config).then(function (response) {
+            $http.delete('http://localhost:8000/api/projetos/deletar/' + id, $config).then(function (response) {
                 if (response.status == 200) {
                     Swal.fire({
                         title: "Deletado!",
@@ -327,7 +327,7 @@ angular.module('meuApp')
             id = $scope.editarProjeto.id_arquivo;
             console.log(id);
 
-            $http.get('http://backend:8000/api/arquivos/' + id + '/download', $config).then(function (response) {
+            $http.get('http://localhost:8000/api/arquivos/' + id + '/download', $config).then(function (response) {
                 console.log(response);
 
                 downloadFile(response.data);
@@ -392,7 +392,7 @@ angular.module('meuApp')
         $scope.deletarTarefaDeVerdade = function (id) {
 
 
-            $http.delete('http://backend:8000/api/tarefas/deletar/' + id, $config).then(function (response) {
+            $http.delete('http://localhost:8000/api/tarefas/deletar/' + id, $config).then(function (response) {
                 if (response.status == 200) {
                     Swal.fire({
                         title: "Deletado!",
@@ -415,7 +415,7 @@ angular.module('meuApp')
         $scope.deletarColaboradorDeVerdade = function (id) {
 
 
-            $http.delete('http://backend:8000/api/projetoUsuario/deletar/' + $scope.editarProjeto.id + '/' + id, $config).then(function (response) {
+            $http.delete('http://localhost:8000/api/projetoUsuario/deletar/' + $scope.editarProjeto.id + '/' + id, $config).then(function (response) {
                 if (response.status == 200) {
                     Swal.fire({
                         title: "Deletado!",
@@ -445,7 +445,7 @@ angular.module('meuApp')
 
         $scope.salvarEdicaoProjeto = function () {
 
-            url = 'http://backend:8000/api/projetos/editarParcial/' + $scope.editarProjeto.id
+            url = 'http://localhost:8000/api/projetos/editarParcial/' + $scope.editarProjeto.id
             $http.patch(url, $scope.editarProjeto, $config).then(function (response) {
                 if (response.status == 200) {
                     Swal.fire({
@@ -467,12 +467,12 @@ angular.module('meuApp')
             var formData = new FormData();
             formData.append('arquivo', $scope.informacoes.arquivo);
 
-            $http.post('http://backend:8000/api/arquivos/salvar', formData, $configContentUndefined).then(function (response) {
+            $http.post('http://localhost:8000/api/arquivos/salvar', formData, $configContentUndefined).then(function (response) {
                 console.log(response);
                 if (response.status == 201) {
                     $scope.novoProjeto.id_arquivo = response.data.id;
 
-                    $http.post('http://backend:8000/api/projetos/cadastrar', $scope.novoProjeto, $config).then(function (response) {
+                    $http.post('http://localhost:8000/api/projetos/cadastrar', $scope.novoProjeto, $config).then(function (response) {
                         console.log(response);
 
                         if (response.status == 201) {
@@ -487,7 +487,7 @@ angular.module('meuApp')
                                 post.id_projeto = response.data.id;
 
 
-                                $http.post('http://backend:8000/api/tarefas/cadastrar', post, $config).then(function (response) {
+                                $http.post('http://localhost:8000/api/tarefas/cadastrar', post, $config).then(function (response) {
                                     console.log(response);
                                 }, function (error) {
                                     console.log(error);

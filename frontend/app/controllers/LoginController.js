@@ -16,7 +16,7 @@ angular.module('meuApp')
                 }
             }
 
-            $http.get('http://backend:8000/api/me', $config).then(function (response) {
+            $http.get('http://localhost:8000/api/me', $config).then(function (response) {
                 console.log(response.status);
                 if(response.status == 200){
                     $state.go('comMenu.home');
@@ -29,7 +29,7 @@ angular.module('meuApp')
         $scope.logar = function () {
 
 
-            $http.post('http://backend:8000/api/login', $scope.usuario).then(function (response) {
+            $http.post('http://localhost:8000/api/login', $scope.usuario).then(function (response) {
                 ///salvar credenciais
                 localStorage.setItem('token', response.data.access_token)
                 $state.go('comMenu.home');

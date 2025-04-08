@@ -10,7 +10,7 @@ angular.module('meuApp')
                 }
             }
 
-            $http.get('http://backend:8000/api/logout', $config).then(function (response) {
+            $http.get('http://localhost:8000/api/logout', $config).then(function (response) {
                 localStorage.removeItem('token');
                 $state.go('login');
 

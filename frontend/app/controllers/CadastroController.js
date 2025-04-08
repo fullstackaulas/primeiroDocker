@@ -17,7 +17,7 @@ angular
         });
       } else {
         $http
-          .post("http://backend:8000/api/usuarios/cadastrarNovo", $scope.info)
+          .post("http://localhost:8000/api/usuarios/cadastrarNovo", $scope.info)
           .then(
             function (response) {
               if (response.status == 201) {

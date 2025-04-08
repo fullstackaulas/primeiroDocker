@@ -15,7 +15,7 @@ angular.module('meuApp')
     }
 
     $scope.listar = function () {
-        $http.get('http://backend:8000/api/projetos/listar', $config).then(function (response) {
+        $http.get('http://localhost:8000/api/projetos/listar', $config).then(function (response) {
             if (response.status == 200) {
                 $scope.projetos = tratarDados(response.data);
             }

@@ -34,7 +34,7 @@ angular.module('meuApp')
             formData.append('arquivo', $scope.informacoes.arquivo);
            
 
-            $http.post('http://backend:8000/api/arquivos/salvar', formData, $config).then(function(response){
+            $http.post('http://localhost:8000/api/arquivos/salvar', formData, $config).then(function(response){
                 console.log(response);
             }, function(error){
                 console.log(error);
@@ -44,7 +44,7 @@ angular.module('meuApp')
 
 
 
-            $http.post('http://backend:8000/api/projetos/cadastrar', $scope.novoProjeto, $config).then(function (response) {
+            $http.post('http://localhost:8000/api/projetos/cadastrar', $scope.novoProjeto, $config).then(function (response) {
                 console.log(response);
 
                 if (response.status == 201) {
@@ -59,7 +59,7 @@ angular.module('meuApp')
                         post.id_projeto = response.data.id;
 
 
-                        $http.post('http://backend:8000/api/tarefas/cadastrar', post, $config).then(function (response) {
+                        $http.post('http://localhost:8000/api/tarefas/cadastrar', post, $config).then(function (response) {
                             console.log(response);
                         }, function (error) {
                             console.log(error);
