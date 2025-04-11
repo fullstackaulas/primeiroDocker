@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Tarefas;
 use Illuminate\Http\Request;
 use DateTime;
+use Illuminate\Support\Facades\Storage;
 
 class ProjetosController extends Controller
 {
@@ -105,6 +106,11 @@ class ProjetosController extends Controller
                 $arquivo = Arquivos::where('id', $projeto[$i]->id_arquivo)->first();
                 // $usuario->img = $arquivo->caminho . $arquivo->nome_criptografado . ".png"; 
                 $projeto[$i]->img = $arquivo->caminho . $arquivo->nome_criptografado;
+                $conteudo = Storage::get($projeto[$i]->img);
+                $tipoMime = Storage::mimeType($projeto[$i]->img);
+                $base64 = 'data:' . $tipoMime . ';base64,' . base64_encode($conteudo);
+                $projeto[$i]->imgBase64 =  $base64;
+
             } else {
                 $projeto[$i]->img = null;
             }

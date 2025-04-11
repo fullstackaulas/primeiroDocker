@@ -9,6 +9,10 @@ class TarefasController extends Controller
 {
     public function cadastrar(Request $request)
     {
+        if($request->nome == '' || $request->nome == null){
+            return response('', 204);
+        }
+
         $tarefa = new Tarefas();
         $tarefa->id_projeto = $request->id_projeto;
         $tarefa->nome = $request->nome;
@@ -65,6 +69,9 @@ class TarefasController extends Controller
 
     public function editarParcial(Request $request, $id)
     {
+        if($request->nome == '' || $request->nome == null){
+            return response('', 204);
+        }
         $tarefa = Tarefas::where('id', $id)->where('created_by', auth()->id())->first();
 
         if (isset($request->nome))

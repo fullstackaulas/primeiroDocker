@@ -42,10 +42,10 @@ angular.module('meuApp')
                     icon: 'error'
                 });
 
-                $scope.usuario = {
-                    email: '',
-                    password: ''
-                }
+                // $scope.usuario = {
+                //     email: '',
+                //     password: ''
+                // }
 
 
 
